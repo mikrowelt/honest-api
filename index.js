@@ -23,6 +23,7 @@ app.post('/api/contact-us', (req, res) => {
   request(verificationUrl,function(error, response, body) {
     body = JSON.parse(body);
     if(body.success !== undefined && !body.success) {
+      console.error(error);
       return res.json({"responseCode" : 1,"responseDesc" : "Не правильно введена captcha"});
     }
 
@@ -48,6 +49,7 @@ app.post('/api/contact-us', (req, res) => {
       if (!error) {
         res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
       } else {
+        console.error(error);
         res.json({"responseCode" : 1,"responseDesc" : "Произошла ошибка. Попробуйте еще раз"});
       }
     });
